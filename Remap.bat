@@ -40,7 +40,7 @@ echo.
 echo Double-check your inputs before proceding!!
 
 :Check
-choice /c yn /m "Are there spaces, and do singal digits have a zero in front? "
+choice /c yn /m "Are there spaces, and do single digits have a zero in front? "
 if ERRORLEVEL 255 (
     goto Check
 ) else if ERRORLEVEL 2 (
