@@ -28,13 +28,14 @@ if ERRORLEVEL 255 (
         goto Choice
     ) else if ERRORLEVEL 1 (
         reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Keyboard Layout" /v "ScanCode Map" /f
+        goto Choice
     )
 ) else if ERRORLEVEL 1 (
     goto Input
 )
 
 :Input
-set /p bytes=How many bytes do you need?
+set /p bytes=How many bytes do you need? 
 set /p map=Enter the map: 
 echo.
 echo Double-check your inputs before proceding!!
@@ -44,8 +45,9 @@ choice /c yn /m "Are there spaces, and do single digits have a zero in front? "
 if ERRORLEVEL 255 (
     goto Check
 ) else if ERRORLEVEL 2 (
-    reg add "HKLM\SYSTEM\CurrentControlSet\Control\Keyboard Layout" /v "ScanCode Map" /t REG_BINARY /d 0000000000000000%bytes%000000%map%00000000 /f
-) else if ERRORLEVEL 1 (
     echo.
     goto Input
+) else if ERRORLEVEL 1 (
+    reg add "HKLM\SYSTEM\CurrentControlSet\Control\Keyboard Layout" /v "ScanCode Map" /t REG_BINARY /d 0000000000000000%bytes%000000%map%00000000 /f
+    goto Choice
 )
